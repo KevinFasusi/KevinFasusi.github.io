@@ -257,12 +257,12 @@ footer {
 .box{
   float:left;
   min-width: 200px;
-  max-height: 310px;
+  min-height: 310px;
 
 }
 
 .box2{
 
   min-width: 200px;
-  max-height: 310px;
+  min-height: 310px;
 }
