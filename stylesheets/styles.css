@@ -253,3 +253,11 @@ footer {
     color:#444;
   }
 }
+
+.box{
+  float:left;
+  min-width: 100px;
+  max-height: auto;
+
+
+}
