@@ -45,7 +45,7 @@ title: Kevin Fasusi
 
   {% for post in site.posts %}
     <li>
-      <a href="{{ post.url }}"><h1>{{ post.title }}</h1></a> 
+      <a class="posttitle" href="{{ post.url }}">{{ post.title }}</a> 
       {{ post.excerpt }}
     {{post.date}}
     </li>

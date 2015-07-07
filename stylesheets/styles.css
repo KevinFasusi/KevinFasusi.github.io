@@ -267,6 +267,8 @@ footer {
   min-height: 150px;
 }
 
-#postdate{
-  font-size: -1em;
+#posttitle{
+  font-size: 2em;
+  color: #94b2fe;
+  
 }
