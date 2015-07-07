@@ -267,8 +267,8 @@ footer {
   min-height: 150px;
 }
 
-#posttitle{
+.posttitle{
   font-size: 2em;
   color: #94b2fe;
-  
+
 }
