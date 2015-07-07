@@ -44,7 +44,7 @@ title: Kevin Fasusi
 
   {% for post in site.posts %}
     
-      <a class="posttitle" href="{{ post.url }}">{{ post.title }}</a> &raquo; <span>{post.date | date: '%B %d, %Y' }}</span>
+      <a class="posttitle" href="{{ post.url }}">{{ post.title }}</a> &raquo; <span>{{post.date | date: '%B %d, %Y' }}</span>
       {{ post.excerpt }}
     
   {% endfor %}
