@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
-@import url(https://fonts.googleapis.com/css?family=Indie+Flower);
+@import url(http://fonts.googleapis.com/css?family=Indie+Flower);
+
 body {
   padding:50px;
   font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -9,7 +10,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   color: #94b2fe;
-  font: "Indie Flower";
+  font: 'Indie Flower', cursive;
   margin:0 0 20px;
 }
 
