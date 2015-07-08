@@ -6,13 +6,3 @@ description: a little solder here, a little prayer there a dash of code...aaand 
 ---
 
 For a project, I recently 
-
-{% highlight ruby %}
-def show
-  @widget = Widget(params[:id])
-  respond_to do |format|
-    format.html # show.html.erb
-    format.json { render json: @widget }
-  end
-end
-{% endhighlight %}
