@@ -1,5 +1,5 @@
-
 ---
+layout: post
 title: Assembling Adafruit LCD
 ---
 
