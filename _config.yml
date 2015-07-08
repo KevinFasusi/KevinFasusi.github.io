@@ -9,6 +9,10 @@ baseurl: "/KevinFasusi.github.io" # the subpath of your site, e.g. /blog/
 url: "/KevinFasusi.github.io" # the base hostname & protocol for your site
 twitter_username: kevin_fasusi
 github_username:  kevinFasusi
+permalink:           pretty
+relative_permalinks: true
+
+
 
 # Build settings
 markdown: kramdown
