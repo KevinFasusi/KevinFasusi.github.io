@@ -9,10 +9,10 @@ title: Assembling Adafruit LCD
 
 For a project, I recently 
 
-```java
+~~~Java
 public class HelloWorld {
    public static void main(String[] args) {
        System.out.println("Hello, world!");
    }
 }
-```
+~~~
