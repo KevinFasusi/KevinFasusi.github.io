@@ -5,6 +5,6 @@ title: Assembling Adafruit LCD
 
 ---
 
-## A little solder here, a little code there aaand...I broke it! ##
+## A little solder here, a little code there aaand &#46;&#46;&#46; I broke it! ##
 
 For a project, I recently 
