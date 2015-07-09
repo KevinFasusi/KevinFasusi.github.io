@@ -274,3 +274,7 @@ footer {
   color: #94b2fe;
 
 }
+.postdate{
+  font-style: italic;
+  font-weight: bold;
+}
