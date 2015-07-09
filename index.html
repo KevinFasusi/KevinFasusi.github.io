@@ -50,12 +50,11 @@ title: Kevin Fasusi
   <!-- This loops through the paginated posts -->
 {% for post in paginator.posts %}
   <h1><a class="posttitle" href="{{ post.url }}">{{ post.title }}</a></h1>
-  <p class="author">
     &raquo;<span class="postdate">{{post.date | date: '%B %d, %Y'}}</span>
-  </p>
-  <div class="content">
+
+ <!--div class="content">
     {{ post.content }}
-  </div>
+  <!/div-->
 {% endfor %}
 
 <!-- Pagination links -->
