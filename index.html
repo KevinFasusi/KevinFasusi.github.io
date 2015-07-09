@@ -42,25 +42,12 @@ title: Kevin Fasusi
 </p>
 
       </header>
- <section>   
-<ul>
-  {% for post in site.posts %}
-  <li>
-  <a class="posttitle" href="{{ post.url }}">{{ post.title }}</a> &raquo; <span> {{post.date | date: '%B %d, %Y'}} </span><br/>
-
-      {{ post.excerpt }}
-    </li>
-  {% endfor %}
-</ul>
-  </body>
-  {% include footer.html %}
-
 
   <!-- This loops through the paginated posts -->
 {% for post in paginator.posts %}
-  <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
+  <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>&raquo;
   <p class="author">
-    <span class="date">{{ post.date }}</span>
+    <span class="date">{{post.date | date: '%B %d, %Y'}}</span>
   </p>
   <div class="content">
     {{ post.content }}
@@ -82,3 +69,5 @@ title: Kevin Fasusi
   {% endif %}
 </div>
 </html>
+  </body>
+  {% include footer.html %}
