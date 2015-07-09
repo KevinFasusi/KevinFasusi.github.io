@@ -49,8 +49,9 @@ title: Kevin Fasusi
 
   <!-- This loops through the paginated posts -->
 {% for post in paginator.posts %}
+&raquo;<span class="postdate">{{post.date | date: '%B %d, %Y'}}</span>
   <h1><a class="posttitle" href="{{ post.url }}">{{ post.title }}</a></h1>
-    &raquo;<span class="postdate">{{post.date | date: '%B %d, %Y'}}</span>
+    
 
  <!--div class="content">
     {{ post.content }}
