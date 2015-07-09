@@ -45,16 +45,11 @@ title: Kevin Fasusi
  <section>   
 
   {% for post in site.posts %}
-    
-      <a class="posttitle" href="{{ post.url }}">{{ post.title }}</a> &raquo; <span> {{post.date | date: '%B %d, %Y' }} </span>
+  <a class="posttitle" href="{{ post.url }}">{{ post.title }}</a> &raquo; <span> {{post.date | date: '%B %d, %Y'}} </span>
+
       {{ post.excerpt }}
     
   {% endfor %}
-
-  {% for post in site.posts limit:1 %}
-    {{post.content}}
-  {% endfor %}
-
 
   </body>
 </html>
