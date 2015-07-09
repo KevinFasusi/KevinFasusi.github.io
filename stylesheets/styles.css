@@ -275,8 +275,7 @@ footer {
 
 }
 .postdate{
-  font-style: italic;
   font-weight: bold;
-  font: cursive;
+  font-family: cursive;
   font-size: 2em; 
 }
