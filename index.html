@@ -49,7 +49,7 @@ title: Kevin Fasusi
 
   <!-- This loops through the paginated posts -->
 {% for post in paginator.posts %}
-
+<br/>
   <h1><a class="posttitle" href="{{ post.url }}">{{ post.title }}</a></h1>
  <h2 class="postdate">&raquo;{{post.date | date: '%B %d, %Y'}}</h2>   
 <br/>
