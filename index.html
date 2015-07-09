@@ -43,13 +43,14 @@ title: Kevin Fasusi
 
       </header>
  <section>   
-
+<ul>
   {% for post in site.posts %}
+  <li>
   <a class="posttitle" href="{{ post.url }}">{{ post.title }}</a> &raquo; <span> {{post.date | date: '%B %d, %Y'}} </span>
 
       {{ post.excerpt }}
-    
+    </li>
   {% endfor %}
-
+</ul>
   </body>
 </html>
