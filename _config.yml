@@ -11,7 +11,8 @@ twitter_username: kevin_fasusi
 github_username:  kevinFasusi
 permalink:           pretty
 relative_permalinks: true
-
+paginate: 10
+paginate_path: "/archives/page/:num"
 
 
 # Build settings
