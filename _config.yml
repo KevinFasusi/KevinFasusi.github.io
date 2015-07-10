@@ -13,7 +13,7 @@ permalink:           pretty
 relative_permalinks: true
 paginate: 10
 paginate_path: "/posts/:num"
-image_path: https://dl.dropboxusercontent.com/u/66577714/picstash.com
+image_path: "https://dl.dropboxusercontent.com/u/66577714/picstash.com"
 
 # Build settings
 markdown: kramdown
