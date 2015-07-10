@@ -9,6 +9,6 @@ excerpt: A little solder here, a little code there aaand &#46;&#46;&#46; I broke
 
 # A little solder here, a little code there aaand &#46;&#46;&#46; I broke it! #
 
-<div class="box">
+<div class="res-pic">
 <img src="{{site.image_path}}/Adafruit-RGB-LCD-Components.jpg" />
 </div>

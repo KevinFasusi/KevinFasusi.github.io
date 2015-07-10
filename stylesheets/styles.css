@@ -281,3 +281,9 @@ footer {
   font-size: 2em; 
   color: #bbffd8;
 }
+
+.res-pic{
+  max-width: 100%;
+  width: 400px;
+  margin: 10%;
+}
