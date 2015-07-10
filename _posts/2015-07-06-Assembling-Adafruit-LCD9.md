@@ -9,4 +9,4 @@ excerpt: A little solder here, a little code there aaand &#46;&#46;&#46; I broke
 
 # A little solder here, a little code there aaand &#46;&#46;&#46; I broke it! #
 
-![test](https://drive.google.com/file/d/0B9cZEOjW7sWJS0Z0Sm9vQjFtVzg/view?usp=sharing)
+![test]({{site.image_path}}/Adafruit-RGB-LCD-Components.jpg)
