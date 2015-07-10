@@ -6,6 +6,8 @@ excerpt: A little solder here, a little code there aaand &#46;&#46;&#46; I broke
 ---
 
 {% include header.html %}
+<section>
 
 # A little solder here, a little code there aaand &#46;&#46;&#46; I broke it! #
 
+</section>
