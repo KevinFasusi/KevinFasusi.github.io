@@ -9,4 +9,4 @@ excerpt: A little solder here, a little code there aaand &#46;&#46;&#46; I broke
 
 # A little solder here, a little code there aaand &#46;&#46;&#46; I broke it! #
 
-![test](/assets/Adafruit-RGB-LCD.jpg)
+![test](assets/Adafruit-RGB-LCD.jpg)
