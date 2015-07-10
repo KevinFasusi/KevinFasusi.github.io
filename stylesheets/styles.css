@@ -283,7 +283,9 @@ footer {
 }
 
 .res-pic{
-  max-width: 100%;
   width: 400px;
-  margin: 10%;
+}
+
+.head{
+  background-image:url(https://dl.dropboxusercontent.com/u/66577714/picstash.com/Header.jpg);
 }
