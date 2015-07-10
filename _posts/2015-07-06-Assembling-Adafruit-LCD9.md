@@ -6,7 +6,7 @@ excerpt: A little solder here, a little code there aaand &#46;&#46;&#46; I broke
 ---
 
 {% include header.html %}
-{% include base.html %}
+
 # A little solder here, a little code there aaand &#46;&#46;&#46; I broke it! #
 
 ![test]({{base}}assets/Adafruit-RGB-LCD.jpg)
