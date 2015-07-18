@@ -6,9 +6,7 @@ excerpt: Building the beast
 ---
 
 {% include header.html %}
-<link rel="stylesheet" href="{{base}}/stylesheets/vc.css">
-<script src="{{base}}/stylesheets/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+
 # Building The Classifier #
 
 
