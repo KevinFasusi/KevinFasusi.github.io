@@ -12,7 +12,7 @@ excerpt: Building the beast
 
 Since the objective is to automate the whole process, I wanted to drop the files in the folder and be done with it. Using Microsoft Scripting runtime object library, I used FileSystemObject and textstream instead of the  first sub routine iterates through the files in the directory. The 'classifier training' class has a method for extracting and tokenizing the text a sentence at a time from each file in the folder.
 
-{% highlight BASIC linenos %}
+{% highlight Visual Basic.NET linenos %}
 Do While filePath <> ""
 
         Debug.Print filePath
@@ -40,7 +40,7 @@ Loop
 {% endhighlight %}
 
 
-{% highlight BASIC linenos %}
+{% highlight Visual Basic.NET linenos %}
 Private Function TokenizeSentence(sentence As String) As Variant
 Dim i, counter As Integer
 Dim bagOfCharArr() As String
