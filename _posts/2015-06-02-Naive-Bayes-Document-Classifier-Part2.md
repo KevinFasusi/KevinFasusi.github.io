@@ -2,7 +2,7 @@
 
 layout: post
 title: Naive Bayes Document CLassifier
-excerpt: Enough with the Naive Bayes Classifiers already sheesh!
+excerpt: Just
 ---
 
 {% include header.html %}
