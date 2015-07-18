@@ -21,16 +21,13 @@ Do While filePath <> ""
                 sentenceText = fsoReadStream.ReadLine
                 sentenceText = RemoveArtifacts(sentenceText)
                 If sentenceText <> "" Then
-                  
-                    sentenceArr() = TokenizeSentence(sentenceText)
-                    
+                    sentenceArr() = TokenizeSentence(sentenceText)                
                     ReDim Preserve corpusArr(j + UBound(sentenceArr()))
                         For i = 0 To UBound(sentenceArr())
                             corpusArr(i + j) = sentenceArr(i)
                         Next
                     j = j + UBound(sentenceArr())
-                Else: End If
-                
+                Else: End If       
             Loop
         Else
         End If
