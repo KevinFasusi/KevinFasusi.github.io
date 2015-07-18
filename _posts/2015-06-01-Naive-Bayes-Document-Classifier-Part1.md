@@ -7,7 +7,7 @@ excerpt: Enough with the Naive Bayes Classifiers already sheesh!
 
 {% include header.html %}
 
-# Naive Bayes Document Classifier PART 1-You did what? #
+# Naive Bayes Document Classifier Part 1-You did what? #
 
 For my thesis, I am expected to write a literature review. The literature review is supposed to summarise the corpus of literature that covers my field of enquiry. The review has to be systematic, which in short means exhaustive and capable of being audited. 
 
