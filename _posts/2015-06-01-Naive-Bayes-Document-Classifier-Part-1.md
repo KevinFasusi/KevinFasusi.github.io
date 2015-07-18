@@ -31,6 +31,8 @@ An output file for each model is consists of a list of every word occurring in t
 <td>208</td>
 <td>0.0041823337</td>
 <td>2.3159703876</td>
+</tr>
+<tr>
 <td>management</td>
 <td>355</td>
 <td>356</td>
@@ -40,7 +42,7 @@ An output file for each model is consists of a list of every word occurring in t
 </table>
  
  The workflow for using the application is very simplpe. 
- 
+
  * **Settting up a project** to create a folder structure that includes, 2 folders for the training copra used to model the conditional probabilities, 1 folder for the unclassified documents and 1 folder for the classified files used to calculate the models accuracy.
 
  * **Loading folders with training files**, in my case articles I had already classified as relevant or irrelevant after the hard exclusion criteria had been applied. Place a selection of these classified files in a folder to validate the accuracy of the model.
