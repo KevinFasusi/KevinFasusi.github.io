@@ -6,15 +6,17 @@ excerpt: Building the beast
 ---
 
 {% include header.html %}
-
+<link rel="stylesheet" href="{{base}}/stylesheets/vc.css">
+<script src="{{base}}/stylesheets/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 # Building The Classifier #
 
 
 Since the objective is to automate the whole process, I wanted to drop the files in the folder and be done with it. Using Microsoft Scripting runtime object library, I used FileSystemObject and textstream instead of the  first sub routine iterates through the files in the directory. The 'classifier training' class has a method for extracting and tokenizing the text a sentence at a time from each file in the folder.
 
-{% highlight Visual Basic.NET linenos %}
-Do While filePath <> ""
+<pre><code class="vbscript" >
 
+Do While filePath <> ""
         Debug.Print filePath
         If filePath <> "ModelData.txt" Then
             Do While fsoReadStream.AtEndOfStream <> True
@@ -37,7 +39,7 @@ Do While filePath <> ""
         Set fsoSourceFile = fsoSource.GetFile(folderPath & pathSep & filePath)
         Set fsoReadStream = fsoSourceFile.OpenAsTextStream(ForReading, TristateUseDefault)
 Loop
-{% endhighlight %}
+</code></pre>
 
 
 {% highlight Visual Basic.NET linenos %}
