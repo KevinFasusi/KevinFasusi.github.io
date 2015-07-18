@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: Naive Bayes Document Classifier
+title: Naive Bayes Document Classifier Part 1
 excerpt: Enough with the Naive Bayes Classifiers already sheesh!
 ---
 
