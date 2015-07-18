@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: Naive Bayes Document CLassifier
+title: Naive Bayes Document Classifier
 excerpt: Enough with the Naive Bayes Classifiers already sheesh!
 ---
 
@@ -23,7 +23,7 @@ I have experience working with VBA (please don’t judge me). I had written seve
 
 ![screenshot NBC excel application]({{base}}/assets/printoutNBC.png "NBC Screenshot")
 
-An output file for each model is consists of a list of every word occuring in the corpus. The format looks similar to the table below.
+An output file for each model is consists of a list of every word occurring in the corpus. The format looks similar to the table below.
 <table>
 <tr>
 <td>information</td>
@@ -34,16 +34,14 @@ An output file for each model is consists of a list of every word occuring in th
 </tr>
 </table>
 
-add example out put and close up shot of classification output.
+ The workflow for using the application involved:
 
- The workflow for the application is as follows:
+ * **Settting up a project**. Setting up a project creates folder structure that includes, 2 folders for the training copra used to model the conditional probabilities, 1 folder for the unclassified documents and 1 folder for the classified files used to calculate the models accuracy.
 
- * **Setup a project**. Settting up a project creates folder structure that includes, 2 folders for the training copra used to model the conditional probabilities, 1 folder for the unclassified documents and 1 folder for the classified files used to calculate the models accuracy.
+ * **Loading folders with training files**. Place files already classified, in my case articles I had already classified as relevant or irrelevant after the hard exclusion criteria had been applied. Place a selection of these classified files in a folder to validate the accuracy of the model.
 
- * **Load Folders with training files**. Place files already classified, in my case articles I had already classified as relevant or irrelevant after the hard exculsion criteria had been applied. Place a selection of these classified files in a folder to validate the accuracy o the model.
+ * **Validating the model**. Classify pre-classified files to test the accuracy of the model.
 
- * **Validate Model**. Classify preclassified files to test the accuracy of the model.
-
- * **Classify Unclassified files**. If the models validity is adequate then continue on to classify the unknown documents.
+ * **Classifying unclassified files**. If the models validity is adequate then continue on to classify the unknown documents. 
 
 I discuss actually building the classifier in the next post.
