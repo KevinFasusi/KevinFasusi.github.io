@@ -7,7 +7,7 @@ excerpt: Building the beast
 
 {% include header.html %}
 
-# Building The Classifier #
+# Naive Bayes Document Classifier Part 2-The good, the bad, the VBA #
 
 
 Since the objective is to automate the whole process, I wanted to drop the files in the folder and be done with it. Using Microsoft Scripting runtime object library, I used FileSystemObject and textstream instead of the input output method. The 'classifier training' class has a method for extracting and tokenizing the text a sentence at a time from each file in the directory. The '.bas' files can be found in my repo here.
