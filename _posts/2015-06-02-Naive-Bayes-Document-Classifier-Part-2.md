@@ -45,6 +45,7 @@ Loop
 
 Below is the method for removing punctuation, it's not pretty but it gets the job done.
 
+
 {% highlight BASIC linenos %}
 Private Function RemoveArtifacts(sentence As String) As String
 
@@ -56,6 +57,7 @@ End Function
 {% endhighlight %}
 
 Below is the method for tokenizing senetence.
+
 
 {% highlight BASIC linenos %}
 Private Function TokenizeSentence(sentence As String) As Variant
@@ -107,4 +109,4 @@ If wordFromArr <> "" Then
 Else: End If
 
 Next
-{% endhiglight %}
+{% endhighlight %}
