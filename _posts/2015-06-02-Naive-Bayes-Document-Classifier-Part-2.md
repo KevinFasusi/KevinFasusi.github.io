@@ -12,7 +12,7 @@ excerpt: Building the beast
 
 Since the objective is to automate the whole process, I wanted to drop the files in the folder and be done with it. Using Microsoft Scripting runtime object library, I used FileSystemObject and textstream instead of the input output method. The 'classifier training' class has a method for extracting and tokenizing the text a sentence at a time from each file in the directory. The '.bas' files can be found in my repo here.
 
-The first code snippet below shows the interation through the directory removing punctuation, tokenizing the text and creating the 'corpuArr' which holds all the takenized text from every file placed in the folder. At this point the array will hold duplicates. These will be removed later, when the number of occurances for each word is tallied.
+The first code snippet below shows the interation through the directory removing punctuation, tokenizing the text and creating the 'corpuArr' which holds all the takenized text from every file placed in the folder. At this point the array will hold duplicates, this is intentional. The duplicates will be removed later, when the number of occurances for each word is tallied.
 
 Extracting, removing punctuation and tokenizing.
 {% highlight BASIC linenos %}
@@ -54,6 +54,7 @@ End Function
 {% endhighlight %}
 
 Below is the method for tokenizing senetence.
+
 {% highlight BASIC linenos %}
 Private Function TokenizeSentence(sentence As String) As Variant
 Dim i, counter As Integer
@@ -78,5 +79,29 @@ TokenizeSentence = bagOfWordsArr()
 End Function
 {% endhighlight %}
 
+At this stage it is normal to remove 'stop words', these are words with little lexical content (Foreman, 2014:91). However removing all words with 4 charaters or less proved a useful quick and dirty method. I had planned on incorporating a list of stop words and I may yet still. 
 
-First thing that wass required was to remove the punctuation from
+After tokenizing the sentences and removing the punctuation, the next step is to count the tokens and calculate the conditional probabilities. 
+
+{% highlight BASIC linenos}
+
+wordFromArr = cleanCorpusArr(i, 0)
+If wordFromArr <> "" Then
+    matchCondition = chkArray(wordFromArr, tallyCorpusArr)
+        If matchCondition = False Then
+            tallyCorpusArr(p, 0) = cleanCorpusArr(i, 0)
+            j = 0
+            tallyCount = 0
+            Do Until j = UBound(cleanCorpusArr())
+                If tallyCorpusArr(p, 0) = cleanCorpusArr(j, 0) Then
+                    tallyCount = tallyCount + 1
+                    tallyCorpusArr(p, 1) = tallyCount
+                Else: End If
+                 j = j + 1
+            Loop
+              p = p + 1
+        Else: End If
+Else: End If
+
+Next
+{% endhiglight %}
