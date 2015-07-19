@@ -14,7 +14,8 @@ Since the objective is to automate the whole process, I wanted to drop the files
 
 The first code snippet below shows the interation through the directory removing punctuation, tokenizing the text and creating the 'corpuArr' which holds all the takenized text from every file placed in the folder. At this point the array will hold duplicates, this is intentional. The duplicates will be removed later, when the number of occurances for each word is tallied.
 
-Extracting, removing punctuation and tokenizing.
+## Removing Punctuation and Tokenizing. ##
+
 {% highlight BASIC linenos %}
 Do While filePath <> ""
         Debug.Print filePath
@@ -43,6 +44,7 @@ Loop
 
 
 Below is the method for removing punctuation, it's not pretty but it gets the job done.
+
 {% highlight BASIC linenos %}
 Private Function RemoveArtifacts(sentence As String) As String
 
@@ -79,6 +81,7 @@ TokenizeSentence = bagOfWordsArr()
 End Function
 {% endhighlight %}
 
+## Stop Words ##
 At this stage it is normal to remove 'stop words', these are words with little lexical content (Foreman, 2014:91). However removing all words with 4 charaters or less proved a useful quick and dirty method. I had planned on incorporating a list of stop words and I may yet still. 
 
 After tokenizing the sentences and removing the punctuation, the next step is to count the tokens and calculate the conditional probabilities. 
