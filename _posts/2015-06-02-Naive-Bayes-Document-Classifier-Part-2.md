@@ -15,7 +15,7 @@ Since the objective is to automate the whole process, I wanted to drop the files
 The first code snippet below shows the interation through the directory removing punctuation, tokenizing the text and creating the 'corpuArr' which holds all the takenized text from every file placed in the folder. At this point the array will hold duplicates. These will be removed later, when the number of occurances for each word is tallied.
 
 Extracting, removing punctuation and tokenizing.
-{% highlight BASIClinenos %}
+{% highlight BASIC linenos %}
 Do While filePath <> ""
         Debug.Print filePath
         If filePath <> "ModelData.txt" Then
