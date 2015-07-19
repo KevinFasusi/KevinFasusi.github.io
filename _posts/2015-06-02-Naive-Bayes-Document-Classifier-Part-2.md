@@ -10,9 +10,12 @@ excerpt: Building the beast
 # Building The Classifier #
 
 
-Since the objective is to automate the whole process, I wanted to drop the files in the folder and be done with it. Using Microsoft Scripting runtime object library, I used FileSystemObject and textstream instead of the  first sub routine iterates through the files in the directory. The 'classifier training' class has a method for extracting and tokenizing the text a sentence at a time from each file in the folder.
+Since the objective is to automate the whole process, I wanted to drop the files in the folder and be done with it. Using Microsoft Scripting runtime object library, I used FileSystemObject and textstream instead of the input output method. The 'classifier training' class has a method for extracting and tokenizing the text a sentence at a time from each file in the directory. The '.bas' files can be found in my repo here.
 
-<pre><code class="vbs" >
+The first code snippet below shows the interation through the directory removing punctuation, tokenizing the text and creating the 'corpuArr' which holds all the takenized text from every file placed in the folder. At this point the array will hold duplicates. These will be removed later, when the number of occurances for each word is tallied.
+
+Extracting, removing punctuation and tokenizing.
+{% highlight BASIClinenos %}
 Do While filePath <> ""
         Debug.Print filePath
         If filePath <> "ModelData.txt" Then
@@ -36,9 +39,22 @@ Do While filePath <> ""
         Set fsoSourceFile = fsoSource.GetFile(folderPath & pathSep & filePath)
         Set fsoReadStream = fsoSourceFile.OpenAsTextStream(ForReading, TristateUseDefault)
 Loop
-</code></pre>
+{% endhighlight %}
 
-{% highlight Visual Basic.NET linenos %}
+
+Below is the method for removing punctuation, it's not pretty but it gets the job done.
+{% highlight BASIC linenos %}
+Private Function RemoveArtifacts(sentence As String) As String
+
+    RemoveArtifacts = Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(LCase(sentence), ". ", " "), ", ", " "), "; ", " "), ": ", " ") _
+                                , "' ", " "), "! ", " "), "# ", " "), "$", " "), "%", " "), "&", " "), "(", " "), ")", " "), " - ", " "), "_", " "), "--", " "), "+", " ") _
+                                , "=", " "), "/", " "), "\", " "), "{", " "), "}", " "), "[", " "), "]", " "), """ ", " "), "?", " "), "*", " "), " """, " "), """", " ")
+                                
+End Function
+{% endhighlight %}
+
+Below is the method for tokenizing senetence.
+{% highlight BASIC linenos %}
 Private Function TokenizeSentence(sentence As String) As Variant
 Dim i, counter As Integer
 Dim bagOfCharArr() As String
