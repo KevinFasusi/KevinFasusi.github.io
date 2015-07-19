@@ -83,7 +83,7 @@ At this stage it is normal to remove 'stop words', these are words with little l
 
 After tokenizing the sentences and removing the punctuation, the next step is to count the tokens and calculate the conditional probabilities. 
 
-{% highlight BASIC linenos}
+{% highlight BASIC linenos %}
 
 wordFromArr = cleanCorpusArr(i, 0)
 If wordFromArr <> "" Then
