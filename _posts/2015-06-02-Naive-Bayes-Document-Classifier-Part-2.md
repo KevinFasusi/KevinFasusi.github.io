@@ -84,9 +84,11 @@ End Function
 {% endhighlight %}
 
 ## Stop Words ##
-At this stage it is normal to remove 'stop words', these are words with little lexical content (Foreman, 2014:91). However removing all words with 4 charaters or less proved a useful quick and dirty method. I had planned on incorporating a list of stop words and I may yet still. 
+At this stage it is normal to remove 'stop words', these are words with little lexical content (Foreman, 2014:91). However, as advised in the data smart book, removing all words with 4 charaters or less proved a useful quick and dirty method. I had planned on incorporating a list of stop words and I may yet still. 
 
-After tokenizing the sentences and removing the punctuation, the next step is to count the tokens and calculate the conditional probabilities. 
+## Tokens and Probabilities
+
+After tokenizing the sentences and removing the punctuation, the next step is to count the tokens and calculate the conditional probabilities. The cleaned tokens (stop words and punctuation removed) are tallied and the frequency of each word is stored in a 2-dimentional array (tallyCorpusArr). 
 
 {% highlight BASIC linenos %}
 
@@ -110,3 +112,24 @@ Else: End If
 
 Next
 {% endhighlight %}
+
+The cumulative total of all the tokens is then calculated and used to calculate the probability of each token in the corpus. The log normal probability is calculated using the LN function. The actual tally, additive smoothed tally, probability and log normal probability are then added to an array before writing to a text file. An example of the files content can be seen below.
+
+<table>
+<tr>
+<td>information</td>
+<td>207</td>
+<td>208</td>
+<td>0.0041823337</td>
+<td>2.3159703876</td>
+</tr>
+<tr>
+<td>management</td>
+<td>355</td>
+<td>356</td>
+<td>0.0071582249</td>
+<td>2.5502283777</td>
+</tr>
+</table>
+ 
+
