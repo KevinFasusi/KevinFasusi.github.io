@@ -11,6 +11,7 @@ twitter_username: kevin_fasusi
 github_username:  kevinFasusi
 permalink:           pretty
 relative_permalinks: true
+comments: true
 paginate: 10
 paginate_path: "/posts/:num"
 image_path: "https://dl.dropboxusercontent.com/u/66577714/picstash.com"
