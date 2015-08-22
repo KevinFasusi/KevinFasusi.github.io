@@ -273,4 +273,21 @@ footer {
   font-size: 2em;
   color: #94b2fe;
 
+
+}
+.postdate{
+  font-weight: bold;
+  font-family: cursive;
+  font-size: 2em; 
+  color: #94b2fe;
+}
+
+.res-pic{
+  width: 400px;
+}
+
+.head{
+  background-repeat: no-repeat;
+background-position: top center;
+  background-image:url(https://dl.dropboxusercontent.com/u/66577714/picstash.com/Header.jpg);
 }

@@ -10,9 +10,9 @@ excerpt: Building the beast
 # Naive Bayes Document Classifier Part 2-The good, the bad, the VBA #
 
 
-Since the objective is to automate the whole process, I wanted to drop the files in the folder and be done with it. Using Microsoft Scripting runtime object library, I used FileSystemObject and textstream instead of the input output method. The 'classifier training' class has a method for extracting and tokenizing the text a sentence at a time from each file in the directory. The '.bas' files can be found in my repo here.
+The objective is to automate the whole process; I wanted to drop the files in the folder, and that is it. Using Microsoft Scripting Runtime object library, I used FileSystemObject and textstream instead of the input-output method. The 'classifier training' class has a method for extracting and tokenizing the text a sentence at a time from each file in the directory. The '.bas' files are in my repo here.
 
-The first code snippet below shows the interation through the directory removing punctuation, tokenizing the text and creating the 'corpuArr' which holds all the takenized text from every file placed in the folder. At this point the array will hold duplicates, this is intentional. The duplicates will be removed later, when the number of occurances for each word is tallied.
+The first code snippet below shows the iteration through the directory tokenizing the text, removing punctuation and creating the 'corpuArr' which holds all the tokenized text from every file placed in the folder. At this point the array will hold duplicates, this is intentional. The duplicates will be removed later when every instance of the same word is tallied.
 
 ## Removing Punctuation and Tokenizing. ##
 
@@ -84,11 +84,12 @@ End Function
 {% endhighlight %}
 
 ## Stop Words ##
-At this stage it is normal to remove 'stop words', these are words with little lexical content (Foreman, 2014:91). However, as advised in the data smart book, removing all words with 4 charaters or less proved a useful quick and dirty method. I had planned on incorporating a list of stop words and I may yet still. 
+
+At this stage it is normal to remove 'stop words', these are words with little lexical content (Foreman, 2014:91). However, as advised in the data smart book, removing all words with four characters or less proved a useful quick and dirty method. I had planned on incorporating a list of stop words and I may yet still. 
 
 ## Tokens and Probabilities
 
-After tokenizing the sentences and removing the punctuation, the next step is to count the tokens and calculate the conditional probabilities. The cleaned tokens (stop words and punctuation removed) are tallied and the frequency of each word is stored in a 2-dimentional array (tallyCorpusArr). 
+After tokenizing the sentences and removing the punctuation, the next step is to count the tokens and calculate the conditional probabilities. The cleaned tokens (stop words and punctuation removed) are tallied, and the frequency of each word is stored in a 2-dimentional array (tallyCorpusArr). 
 
 {% highlight BASIC linenos %}
 
@@ -113,23 +114,32 @@ Else: End If
 Next
 {% endhighlight %}
 
-The cumulative total of all the tokens is then calculated and used to calculate the probability of each token in the corpus. The log normal probability is calculated using the LN function. The actual tally, additive smoothed tally, probability and log normal probability are then added to an array before writing to a text file. An example of the files content can be seen below.
+The cumulative total of all the tokens is then calculated and used to calculate the probability of each token in the corpus. The normal logarithmic probability is calculated using the LN function. The actual tally, additive smoothed tally, probability and LN probability are then added to an array before writing to a text file. An example of the files content is below.
 
 <table>
-<tr>
-<td>information</td>
-<td>207</td>
-<td>208</td>
-<td>0.0041823337</td>
-<td>2.3159703876</td>
-</tr>
-<tr>
-<td>management</td>
-<td>355</td>
-<td>356</td>
-<td>0.0071582249</td>
-<td>2.5502283777</td>
-</tr>
+    <thead>
+        <tr>
+            <th>Token</th>
+            <th>Tally Count</th>
+            <th>Additive Smoothed Tally</th>
+            <th>Probability</th>
+            <th>Logarithmic Probability</th>
+        </tr>
+    </thead>
+    <tr>
+        <td>information</td>
+        <td>207</td>
+        <td>208</td>
+        <td>0.0041823337</td>
+        <td>2.3159703876</td>
+    </tr>
+    <tr>
+        <td>management</td>
+        <td>355</td>
+        <td>356</td>
+        <td>0.0071582249</td>
+        <td>2.5502283777</td>
+    </tr>
 </table>
  
 

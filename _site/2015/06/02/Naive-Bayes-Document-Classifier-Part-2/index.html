@@ -1,0 +1,145 @@
+<html>
+  <head>
+  <!-- _includes/base.html -->
+
+
+
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
+    <link rel="stylesheet" href="/stylesheets/pygment_trac.css" /> 
+    <link rel="stylesheet" href="/stylesheets/syntax.css" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link href="http://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet" type="text/css" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head> 
+
+  </html>
+
+<h1 id="naive-bayes-document-classifier-part-2-the-good-the-bad-the-vba">Naive Bayes Document Classifier Part 2-The good, the bad, the VBA</h1>
+
+<p>The objective is to automate the whole process; I wanted to drop the files in the folder, and that is it. Using Microsoft Scripting Runtime object library, I used FileSystemObject and textstream instead of the input-output method. The ‘classifier training’ class has a method for extracting and tokenizing the text a sentence at a time from each file in the directory. The ‘.bas’ files are in my repo here.</p>
+
+<p>The first code snippet below shows the iteration through the directory tokenizing the text, removing punctuation and creating the ‘corpuArr’ which holds all the tokenized text from every file placed in the folder. At this point the array will hold duplicates, this is intentional. The duplicates will be removed later when every instance of the same word is tallied.</p>
+
+<h2 id="removing-punctuation-and-tokenizing">Removing Punctuation and Tokenizing.</h2>
+
+<div class="highlight"><pre><code class="language-basic" data-lang="basic"><span class="lineno"> 1</span> <span class="vg">Do</span><span class="w"> </span><span class="vg">While</span><span class="w"> </span><span class="vg">filePath</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="lineno"> 2</span> <span class="w">        </span><span class="vg">Debug</span><span class="o">.</span><span class="vg">Print</span><span class="w"> </span><span class="vg">filePath</span>
+<span class="lineno"> 3</span> <span class="w">        </span><span class="vg">If</span><span class="w"> </span><span class="vg">filePath</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="s2">&quot;ModelData.txt&quot;</span><span class="w"> </span><span class="vg">Then</span>
+<span class="lineno"> 4</span> <span class="w">            </span><span class="vg">Do</span><span class="w"> </span><span class="vg">While</span><span class="w"> </span><span class="vg">fsoReadStream</span><span class="o">.</span><span class="vg">AtEndOfStream</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="vg">True</span>
+<span class="lineno"> 5</span> <span class="w">                </span><span class="vg">sentenceText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">fsoReadStream</span><span class="o">.</span><span class="vg">ReadLine</span>
+<span class="lineno"> 6</span> <span class="w">                </span><span class="vg">sentenceText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">RemoveArtifacts</span><span class="p">(</span><span class="vg">sentenceText</span><span class="p">)</span>
+<span class="lineno"> 7</span> <span class="w">                </span><span class="vg">If</span><span class="w"> </span><span class="vg">sentenceText</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="vg">Then</span>
+<span class="lineno"> 8</span> <span class="w">                    </span><span class="vg">sentenceArr</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">TokenizeSentence</span><span class="p">(</span><span class="vg">sentenceText</span><span class="p">)</span><span class="w">                </span>
+<span class="lineno"> 9</span> <span class="w">                    </span><span class="vg">ReDim</span><span class="w"> </span><span class="vg">Preserve</span><span class="w"> </span><span class="vg">corpusArr</span><span class="p">(</span><span class="vg">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="vg">UBound</span><span class="p">(</span><span class="vg">sentenceArr</span><span class="p">()))</span>
+<span class="lineno">10</span> <span class="w">                        </span><span class="vg">For</span><span class="w"> </span><span class="vg">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="il">0</span><span class="w"> </span><span class="vg">To</span><span class="w"> </span><span class="vg">UBound</span><span class="p">(</span><span class="vg">sentenceArr</span><span class="p">())</span>
+<span class="lineno">11</span> <span class="w">                            </span><span class="vg">corpusArr</span><span class="p">(</span><span class="vg">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="vg">j</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">sentenceArr</span><span class="p">(</span><span class="vg">i</span><span class="p">)</span>
+<span class="lineno">12</span> <span class="w">                        </span><span class="vg">Next</span>
+<span class="lineno">13</span> <span class="w">                    </span><span class="vg">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="vg">UBound</span><span class="p">(</span><span class="vg">sentenceArr</span><span class="p">())</span>
+<span class="lineno">14</span> <span class="w">                </span><span class="nl">Else:</span><span class="w"> </span><span class="vg">End</span><span class="w"> </span><span class="vg">If</span><span class="w">       </span>
+<span class="lineno">15</span> <span class="w">            </span><span class="vg">Loop</span>
+<span class="lineno">16</span> <span class="w">        </span><span class="vg">Else</span>
+<span class="lineno">17</span> <span class="w">        </span><span class="vg">End</span><span class="w"> </span><span class="vg">If</span>
+<span class="lineno">18</span> <span class="w">        </span><span class="vg">filePath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">Dir</span><span class="p">()</span>
+<span class="lineno">19</span> <span class="w">    </span>
+<span class="lineno">20</span> <span class="w">        </span><span class="vg">fsoReadStream</span><span class="o">.</span><span class="vg">Close</span>
+<span class="lineno">21</span> <span class="w">        </span><span class="vg">Set</span><span class="w"> </span><span class="vg">fsoSourceFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">fsoSource</span><span class="o">.</span><span class="vg">GetFile</span><span class="p">(</span><span class="vg">folderPath</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="vg">pathSep</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="vg">filePath</span><span class="p">)</span>
+<span class="lineno">22</span> <span class="w">        </span><span class="vg">Set</span><span class="w"> </span><span class="vg">fsoReadStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">fsoSourceFile</span><span class="o">.</span><span class="vg">OpenAsTextStream</span><span class="p">(</span><span class="vg">ForReading</span><span class="p">,</span><span class="w"> </span><span class="vg">TristateUseDefault</span><span class="p">)</span>
+<span class="lineno">23</span> <span class="vg">Loop</span></code></pre></div>
+
+<p>Below is the method for removing punctuation, it’s not pretty but it gets the job done.</p>
+
+<div class="highlight"><pre><code class="language-basic" data-lang="basic"><span class="lineno">1</span> <span class="vg">Private</span><span class="w"> </span><span class="vg">Function</span><span class="w"> </span><span class="vg">RemoveArtifacts</span><span class="p">(</span><span class="vg">sentence</span><span class="w"> </span><span class="vg">As</span><span class="w"> </span><span class="vg">String</span><span class="p">)</span><span class="w"> </span><span class="vg">As</span><span class="w"> </span><span class="vg">String</span>
+<span class="lineno">2</span> 
+<span class="lineno">3</span> <span class="w">    </span><span class="vg">RemoveArtifacts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Replace</span><span class="p">(</span><span class="vg">LCase</span><span class="p">(</span><span class="vg">sentence</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;. &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">)</span><span class="w"> </span><span class="vg">_</span>
+<span class="lineno">4</span> <span class="w">                                </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&#39; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;! &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;# &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;$&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;%&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;&amp;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;(&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;)&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot; - &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;_&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;+&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">)</span><span class="w"> </span><span class="vg">_</span>
+<span class="lineno">5</span> <span class="w">                                </span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;\&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;{&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;}&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;[&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;]&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;&quot;&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;?&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot; &quot;&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;&quot;&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="lineno">6</span> <span class="w">                                </span>
+<span class="lineno">7</span> <span class="vg">End</span><span class="w"> </span><span class="vg">Function</span></code></pre></div>
+
+<p>Below is the method for tokenizing senetence.</p>
+
+<div class="highlight"><pre><code class="language-basic" data-lang="basic"><span class="lineno"> 1</span> <span class="vg">Private</span><span class="w"> </span><span class="vg">Function</span><span class="w"> </span><span class="vg">TokenizeSentence</span><span class="p">(</span><span class="vg">sentence</span><span class="w"> </span><span class="vg">As</span><span class="w"> </span><span class="vg">String</span><span class="p">)</span><span class="w"> </span><span class="vg">As</span><span class="w"> </span><span class="vg">Variant</span>
+<span class="lineno"> 2</span> <span class="vg">Dim</span><span class="w"> </span><span class="vg">i</span><span class="p">,</span><span class="w"> </span><span class="vg">counter</span><span class="w"> </span><span class="vg">As</span><span class="w"> </span><span class="vg">Integer</span>
+<span class="lineno"> 3</span> <span class="vg">Dim</span><span class="w"> </span><span class="vg">bagOfCharArr</span><span class="p">()</span><span class="w"> </span><span class="vg">As</span><span class="w"> </span><span class="vg">String</span>
+<span class="lineno"> 4</span> <span class="vg">Dim</span><span class="w"> </span><span class="vg">bagOfWordsArr</span><span class="p">()</span><span class="w"> </span><span class="vg">As</span><span class="w"> </span><span class="vg">String</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="vg">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="il">0</span>
+<span class="lineno"> 7</span> <span class="w">    </span><span class="vg">bagOfCharArr</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">Split</span><span class="p">(</span><span class="vg">sentence</span><span class="p">)</span>
+<span class="lineno"> 8</span> <span class="w">    </span><span class="vg">ReDim</span><span class="w"> </span><span class="vg">bagOfWordsArr</span><span class="p">(</span><span class="vg">UBound</span><span class="p">(</span><span class="vg">bagOfCharArr</span><span class="p">()))</span>
+<span class="lineno"> 9</span> <span class="w">        </span><span class="vg">For</span><span class="w"> </span><span class="vg">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="il">0</span><span class="w"> </span><span class="vg">To</span><span class="w"> </span><span class="vg">UBound</span><span class="p">(</span><span class="vg">bagOfCharArr</span><span class="p">())</span>
+<span class="lineno">10</span> <span class="w">            </span><span class="vg">If</span><span class="w"> </span><span class="vg">Not</span><span class="w"> </span><span class="vg">Replace</span><span class="p">(</span><span class="vg">Trim</span><span class="p">(</span><span class="vg">bagOfCharArr</span><span class="p">(</span><span class="vg">i</span><span class="p">)),</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="vg">Then</span>
+<span class="lineno">11</span> <span class="w">                </span><span class="vg">bagOfWordsArr</span><span class="p">(</span><span class="vg">counter</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">bagOfCharArr</span><span class="p">(</span><span class="vg">i</span><span class="p">)</span>
+<span class="lineno">12</span> <span class="w">                </span><span class="vg">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">counter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="il">1</span>
+<span class="lineno">13</span> <span class="w">            </span><span class="nl">Else:</span><span class="w"> </span><span class="vg">End</span><span class="w"> </span><span class="vg">If</span>
+<span class="lineno">14</span> <span class="w">        </span><span class="vg">Next</span>
+<span class="lineno">15</span> <span class="w">    </span><span class="vg">If</span><span class="w"> </span><span class="vg">counter</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="il">0</span><span class="w"> </span><span class="vg">Then</span>
+<span class="lineno">16</span> <span class="w">    </span><span class="vg">ReDim</span><span class="w"> </span><span class="vg">Preserve</span><span class="w"> </span><span class="vg">bagOfWordsArr</span><span class="p">(</span><span class="vg">counter</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="il">1</span><span class="p">)</span>
+<span class="lineno">17</span> <span class="w">    </span><span class="nl">Else:</span><span class="w"> </span><span class="vg">End</span><span class="w"> </span><span class="vg">If</span>
+<span class="lineno">18</span> <span class="w">        </span>
+<span class="lineno">19</span> <span class="vg">wordArr</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">bagOfWordsArr</span><span class="p">()</span>
+<span class="lineno">20</span> <span class="vg">TokenizeSentence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">bagOfWordsArr</span><span class="p">()</span>
+<span class="lineno">21</span> <span class="vg">End</span><span class="w"> </span><span class="vg">Function</span></code></pre></div>
+
+<h2 id="stop-words">Stop Words</h2>
+
+<p>At this stage it is normal to remove ‘stop words’, these are words with little lexical content (Foreman, 2014:91). However, as advised in the data smart book, removing all words with four characters or less proved a useful quick and dirty method. I had planned on incorporating a list of stop words and I may yet still.</p>
+
+<h2 id="tokens-and-probabilities">Tokens and Probabilities</h2>
+
+<p>After tokenizing the sentences and removing the punctuation, the next step is to count the tokens and calculate the conditional probabilities. The cleaned tokens (stop words and punctuation removed) are tallied, and the frequency of each word is stored in a 2-dimentional array (tallyCorpusArr).</p>
+
+<div class="highlight"><pre><code class="language-basic" data-lang="basic"><span class="lineno"> 1</span> <span class="vg">wordFromArr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">cleanCorpusArr</span><span class="p">(</span><span class="vg">i</span><span class="p">,</span><span class="w"> </span><span class="il">0</span><span class="p">)</span>
+<span class="lineno"> 2</span> <span class="vg">If</span><span class="w"> </span><span class="vg">wordFromArr</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="vg">Then</span>
+<span class="lineno"> 3</span> <span class="w">    </span><span class="vg">matchCondition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">chkArray</span><span class="p">(</span><span class="vg">wordFromArr</span><span class="p">,</span><span class="w"> </span><span class="vg">tallyCorpusArr</span><span class="p">)</span>
+<span class="lineno"> 4</span> <span class="w">        </span><span class="vg">If</span><span class="w"> </span><span class="vg">matchCondition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">False</span><span class="w"> </span><span class="vg">Then</span>
+<span class="lineno"> 5</span> <span class="w">            </span><span class="vg">tallyCorpusArr</span><span class="p">(</span><span class="vg">p</span><span class="p">,</span><span class="w"> </span><span class="il">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">cleanCorpusArr</span><span class="p">(</span><span class="vg">i</span><span class="p">,</span><span class="w"> </span><span class="il">0</span><span class="p">)</span>
+<span class="lineno"> 6</span> <span class="w">            </span><span class="vg">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="il">0</span>
+<span class="lineno"> 7</span> <span class="w">            </span><span class="vg">tallyCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="il">0</span>
+<span class="lineno"> 8</span> <span class="w">            </span><span class="vg">Do</span><span class="w"> </span><span class="vg">Until</span><span class="w"> </span><span class="vg">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">UBound</span><span class="p">(</span><span class="vg">cleanCorpusArr</span><span class="p">())</span>
+<span class="lineno"> 9</span> <span class="w">                </span><span class="vg">If</span><span class="w"> </span><span class="vg">tallyCorpusArr</span><span class="p">(</span><span class="vg">p</span><span class="p">,</span><span class="w"> </span><span class="il">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">cleanCorpusArr</span><span class="p">(</span><span class="vg">j</span><span class="p">,</span><span class="w"> </span><span class="il">0</span><span class="p">)</span><span class="w"> </span><span class="vg">Then</span>
+<span class="lineno">10</span> <span class="w">                    </span><span class="vg">tallyCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">tallyCount</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="il">1</span>
+<span class="lineno">11</span> <span class="w">                    </span><span class="vg">tallyCorpusArr</span><span class="p">(</span><span class="vg">p</span><span class="p">,</span><span class="w"> </span><span class="il">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">tallyCount</span>
+<span class="lineno">12</span> <span class="w">                </span><span class="nl">Else:</span><span class="w"> </span><span class="vg">End</span><span class="w"> </span><span class="vg">If</span>
+<span class="lineno">13</span> <span class="w">                 </span><span class="vg">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="il">1</span>
+<span class="lineno">14</span> <span class="w">            </span><span class="vg">Loop</span>
+<span class="lineno">15</span> <span class="w">              </span><span class="vg">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="il">1</span>
+<span class="lineno">16</span> <span class="w">        </span><span class="nl">Else:</span><span class="w"> </span><span class="vg">End</span><span class="w"> </span><span class="vg">If</span>
+<span class="lineno">17</span> <span class="nl">Else:</span><span class="w"> </span><span class="vg">End</span><span class="w"> </span><span class="vg">If</span>
+<span class="lineno">18</span> 
+<span class="lineno">19</span> <span class="vg">Next</span></code></pre></div>
+
+<p>The cumulative total of all the tokens is then calculated and used to calculate the probability of each token in the corpus. The normal logarithmic probability is calculated using the LN function. The actual tally, additive smoothed tally, probability and LN probability are then added to an array before writing to a text file. An example of the files content is below.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Token</th>
+            <th>Tally Count</th>
+            <th>Additive Smoothed Tally</th>
+            <th>Probability</th>
+            <th>Logarithmic Probability</th>
+        </tr>
+    </thead>
+    <tr>
+        <td>information</td>
+        <td>207</td>
+        <td>208</td>
+        <td>0.0041823337</td>
+        <td>2.3159703876</td>
+    </tr>
+    <tr>
+        <td>management</td>
+        <td>355</td>
+        <td>356</td>
+        <td>0.0071582249</td>
+        <td>2.5502283777</td>
+    </tr>
+</table>
+
