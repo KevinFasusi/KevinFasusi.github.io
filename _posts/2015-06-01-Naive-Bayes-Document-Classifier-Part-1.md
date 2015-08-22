@@ -1,6 +1,7 @@
 ---
 
 layout: post
+comments: true
 title: Naive Bayes Document Classifier Part 1
 excerpt: Enough with the Naive Bayes Classifiers already sheesh!
 ---
