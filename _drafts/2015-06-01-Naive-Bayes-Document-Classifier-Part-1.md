@@ -1,20 +1,17 @@
 ---
 
-layout: post
+layout: posts
 comments: true
 title: Naive Bayes Document Classifier Part 1
-excerpt: Enough with the Naive Bayes Classifiers already sheesh!
+excerpt_separator: <!--more -->
 ---
 
 {% include header.html %}
 
-# Naive Bayes Document Classifier Part 1-You did what? #
-
 For my thesis, I am expected to write a literature review. The literature review is supposed to summarise the corpus of literature that covers my field of enquiry. The review has to be systematic, which in short means exhaustive and capable of being audited. 
 
 To focus the literature search, you take keywords and create search terms. The search terms are then chained together to create search string. Depending on the database these search strings are then used to interrogate a journal database such as Science Direct, Proquest, etc. 
-
-When discriminating between irrelevant and relevant articles, hard exclusion criteria are used. The criteria can be the year of publication, peer-review, etc. I found these easy to implement, they are objective and can in most cases be implemented using the filtering mechanism of the journal database being queried.
+<!--more -->When discriminating between irrelevant and relevant articles, hard exclusion criteria are used. The criteria can be the year of publication, peer-review, etc. I found these easy to implement, they are objective and can in most cases be implemented using the filtering mechanism of the journal database being queried.
 
 A flow diagram detailing the exclusion process is illustrated in the [Business Research](http://www.amazon.co.uk/Business-Research-Practical-Undergraduate-Postgraduate/dp/0230301835/ref=sr_1_sc_1?ie=UTF8&qid=1437217747&sr=8-1-spell&keywords=business+research+jill+colis) book written by Dr Jill Collis. The diagram is taken from my research, as one of many examples from willing research students for this book. Dr Collis is an excellent lecturer and researcher in Accounting and It was an honour to be asked to participate
 

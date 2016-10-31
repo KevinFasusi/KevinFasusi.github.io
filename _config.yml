@@ -16,3 +16,4 @@ image_path: "https://dl.dropboxusercontent.com/u/66577714/picstash.com"
 highlighter: 'rouge'
 # Build settings
 markdown: kramdown
+gems: [jekyll-paginate]

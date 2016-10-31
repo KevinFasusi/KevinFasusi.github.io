@@ -1,0 +1,162 @@
+  <html>
+  <head>
+  <!-- _includes/base.html -->
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/pygment_trac.css"> 
+    <link rel="stylesheet" href="/stylesheets/syntax.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head> 
+
+  </html>
+
+      <body>
+<div class="wrapper">
+    <header>
+        <h1>Thoughts on Supplychainpy Release 0.0.4</h1>
+        </br>
+        <p class="view"><a href="https://github.com/KevinFasusi">View My GitHub Profile</a></p>
+
+        <p class="view">
+            <!-- Twitter -->
+            <a class="btn btn-twitter" href="https://twitter.com/Kevin_Fasusi"><i class="fa fa-twitter"></i> Twitter</a><br/>
+            <!-- LinkedIn -->
+            <a class="btn btn-linkedin" href="https://t.co/vVIDg5IH6m"><i class="fa fa-linkedin"></i> LinkedIn</a><br/>
+            <!-- Googleplus -->
+            <a class="btn btn-googleplus" href="https://plus.google.com/u/0/+KevinFasusi/posts"><i
+                    class="fa fa-google-plus"></i> Google+</a>
+            <br/>
+            <a rel="stylesheet" type="text/css" href="/">Blog</a>
+            <br/>
+            <a rel="stylesheet" type="text/css" href="about/"> About</a>
+
+        </p>
+
+    </header>
+    <section>
+
+        <html>
+  <head>
+  <!-- _includes/base.html -->
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/pygment_trac.css"> 
+    <link rel="stylesheet" href="/stylesheets/syntax.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head> 
+
+  </html>
+
+        <html>
+  <head>
+  <!-- _includes/base.html -->
+
+
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
+    <link rel="stylesheet" href="/stylesheets/pygment_trac.css" /> 
+    <link rel="stylesheet" href="/stylesheets/syntax.css" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link href="http://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet" type="text/css" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head> 
+
+  </html>
+
+<p>For a few months now I have been working on a Project for Supply Chain reporting and analysis. It has come a little way but is far from feature complete. Currently, the project is on planning release 0.0.3 and 0.0.4 is just around the corner. <!--more --></p>
+
+<h2 id="issues">Issues</h2>
+
+<p>The main problems that are holding up the release, and even after release will be in a less than ideal state are:</p>
+
+<ul>
+  <li>The sequential computation of the forecasts using evolutionary algorithms for optimised alpha and gamma values.</li>
+  <li>The view for the SKU level details has become a sprawling kludge of HTML and Jinja.</li>
+</ul>
+
+<h3 id="sprawling-html-and-jinja">Sprawling HTML and Jinja</h3>
+
+<p>For small inventory profiles &lt; 500 SKUs the implementation of the forecasting is not too prohibitive. However, in more real-world scenarios it needs to deal with inventory profiles that are bigger by orders of magnitude. One issue here is that the forecasting problem is an embarrassingly parallel problem. The current implementation is sequential, parallelising this code should speed it up considerably. I love Python; I do, but gaining speed using parallel processing is not as easy as other programming languages I have used (looking at you vb.net, for all the bad press you get, boy you let me do some powerful things effortlessly).</p>
+
+<p>The kludge of HTML and Jinja is easy to resolve by using the macro function inside Jinja, so that is what I will be doing so going forward.</p>
+
+<h3 id="charts">Charts</h3>
+
+<p>Other general issues, at this point, are the charting and choice of front-end framework. Some of the charts are in d3.js, but that library sure has a steep learning curve. So for speed’s sake, I switched some to Flotr library early on in the development process. The bar charts and pie charts on the <em>Dashboard</em> are d3.js as shown below:</p>
+
+<p><img src="/assets/d3.jpg" alt="d3 charts" title="d3 charts" /></p>
+
+<p>The bar chart and line chart on the <em>SKU breakdown</em> page are Flotr:</p>
+
+<p><img src="/assets/bar_chart.jpg" alt="Flotr bar chart" title="flotr bar chart" /></p>
+
+<p><img src="/assets/line_chart.jpg" alt="Flotr line chart" title="flotr line chart" /></p>
+
+<p>I plan to stick with pure d3.js, but I am a mere mortal and d3.js is written by the gods for the gods.</p>
+
+<h3 id="choosing-a-front-end-framework">Choosing a Front-end Framework</h3>
+
+<p>I have been deliberating over which framework to use in the front-end. Initially, I opted for vanilla ECMAScript 6 and “a bag of Jquery” (shout out to the guys over at the ‘Linux Action Show’ for that one). For rapid development and getting the MVP down, this made a lot of sense. However, going forward I would like to make the JavaScript for the reporting side of the project just as legible and standardised as I attempt to make the Python back-end. For maintenance and minimising technical debt, this is a must.</p>
+
+<p>React.js seemed like the clear winner, regarding popularity, documentation and ease of adoption. After a brief tutorial and playing around with it, I did enjoy it but recently another framework has caught my attention. Vue.js is discussed in the many forums I frequent, so I popped over to their website and read the documentation and boom. It was “you’re alright” at first sight. I read the documentation, and it felt comfortable. I went through nodding my head and smiling through the code snippets. So I think I’m going to give vue.js a shot. I hope vue.js and Jinja plays nicely with each other. Here’s to a cleaner code base and a shiny front-end for the reporting.</p>
+
+
+
+          </div>
+
+  </body>
+</html>
+
+
+
+    </section>
+</div>
+</body>
+
+<!--% if page.comments %
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'kevinfasusigithub';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+% endif % -->
+
+
+    </div>
+
+  </body>
+</html>

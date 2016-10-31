@@ -1,0 +1,116 @@
+  <html>
+  <head>
+  <!-- _includes/base.html -->
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/pygment_trac.css"> 
+    <link rel="stylesheet" href="/stylesheets/syntax.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head> 
+
+  </html>
+
+      <body>
+<div class="wrapper">
+    <header>
+        <h1>Supplychainpy Release 0.0.4 Known Issues</h1>
+        </br>
+        <p class="view"><a href="https://github.com/KevinFasusi">View My GitHub Profile</a></p>
+
+        <p class="view">
+            <!-- Twitter -->
+            <a class="btn btn-twitter" href="https://twitter.com/Kevin_Fasusi"><i class="fa fa-twitter"></i> Twitter</a><br/>
+            <!-- LinkedIn -->
+            <a class="btn btn-linkedin" href="https://t.co/vVIDg5IH6m"><i class="fa fa-linkedin"></i> LinkedIn</a><br/>
+            <!-- Googleplus -->
+            <a class="btn btn-googleplus" href="https://plus.google.com/u/0/+KevinFasusi/posts"><i
+                    class="fa fa-google-plus"></i> Google+</a>
+            <br/>
+            <a rel="stylesheet" type="text/css" href="about/"> About</a>
+
+        </p>
+
+    </header>
+    <section>
+
+        <html>
+  <head>
+  <!-- _includes/base.html -->
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/pygment_trac.css"> 
+    <link rel="stylesheet" href="/stylesheets/syntax.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head> 
+
+  </html>
+
+        
+<p>For a few months now I have been working on a Project for Supply Chain reporting and analysis. It has come a little way but is far from feature complete. Currently, the project is on planning release 0.0.3 and 0.0.4 is just around the corner. <!--more --> The main issues that are holding up the release, and even after release will be in a less than ideal state are:</p>
+
+<ul>
+  <li>The sequential computation of the forecasts using evolutionary algorithms for optimised alpha and gamma values.</li>
+  <li>The view for the SKU level details has become a sprawling kludge of HTML and Jinja. I am breaking the components into more digestible macros and continuing from there.</li>
+</ul>
+
+<h1 id="profiling-optimised-simple-exponential-smoothing-and-holts-trend-corrected-forecasts">Profiling Optimised Simple Exponential Smoothing and Holts Trend Corrected Forecasts</h1>
+
+<p>The two exponential smoothing techniques implemented in the library, have an optimised variant. Using the <code class="highlighter-rouge">optimise</code> flag. When profiling the objects involved in the forecasting process,
+<img src="/assets/pg1.jpg" alt="screenshot NBC excel application" />
+For small inventory profiles &lt; 500 SKUs the implementation of the forecasting is not too prohibitive. However, in more real-world scenarios it needs to deal with inventory profiles that are bigger by orders of magnitude. One issue here is that the Forecasting problem is an embarrassingly parallel problem. The current implementation is sequential, parallelising this code should speed it up considerably. I love Python; I do, but concurrency and parallelising are not as easy as other programming languages I have used (looking at you vb.net, for all the bad press you get, boy you let me do some powerful things effortlessly).</p>
+
+<p>General issues at this point include the charting and front-end framework. Some of the charts are in d3.js, but that library sure has a steep learning curve. So for speed’s sake, I switched some to Flotr library. I plan to stick with pure d3.js, but I am a mere mortal and d3.js was apparently written by the gods for the gods.</p>
+
+
+          </div>
+
+  </body>
+</html>
+
+
+
+    </section>
+</div>
+</body>
+
+<!--% if page.comments %
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'kevinfasusigithub';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+% endif % -->
+
+
+    </div>
+
+  </body>
+</html>

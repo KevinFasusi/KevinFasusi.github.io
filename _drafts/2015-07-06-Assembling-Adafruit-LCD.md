@@ -1,8 +1,14 @@
-
 ---
+
+layout: post
 title: Assembling Adafruit LCD
+excerpt: A little solder here, a little code there aaand &#46;&#46;&#46; I broke it!
 ---
 
-# Assembling Adafruit LCD #
+{% include header.html %}
 
-For a project, I recently 
+# A little solder here, a little code there aaand &#46;&#46;&#46; I broke it! #
+
+<div class="res-pic">
+<img src="{{site.image_path}}/Adafruit-RGB-LCD-Components.jpg" />
+</div>
