@@ -67,31 +67,9 @@
 
   </html>
 
-        <html>
-  <head>
-  <!-- _includes/base.html -->
+        <p>For a few months now I have been working on a project for Supply Chain reporting and analysis. It has come a little way but is far from feature complete. Currently, the project is on planning release 0.0.3 and 0.0.4 is just around the corner. <!--more --></p>
 
-
-
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-
-    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="/stylesheets/styles.css" />
-    <link rel="stylesheet" href="/stylesheets/pygment_trac.css" /> 
-    <link rel="stylesheet" href="/stylesheets/syntax.css" /> 
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link href="http://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet" type="text/css" />
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head> 
-
-  </html>
-
-<p>For a few months now I have been working on a Project for Supply Chain reporting and analysis. It has come a little way but is far from feature complete. Currently, the project is on planning release 0.0.3 and 0.0.4 is just around the corner. <!--more --></p>
-
-<h2 id="issues">Issues</h2>
+<h3 id="issues">Issues</h3>
 
 <p>The main problems that are holding up the release, and even after release will be in a less than ideal state are:</p>
 
@@ -104,7 +82,7 @@
 
 <p>For small inventory profiles &lt; 500 SKUs the implementation of the forecasting is not too prohibitive. However, in more real-world scenarios it needs to deal with inventory profiles that are bigger by orders of magnitude. One issue here is that the forecasting problem is an embarrassingly parallel problem. The current implementation is sequential, parallelising this code should speed it up considerably. I love Python; I do, but gaining speed using parallel processing is not as easy as other programming languages I have used (looking at you vb.net, for all the bad press you get, boy you let me do some powerful things effortlessly).</p>
 
-<p>The kludge of HTML and Jinja is easy to resolve by using the macro function inside Jinja, so that is what I will be doing so going forward.</p>
+<p>The kludge of HTML and Jinja is easy to resolve by using the macro function inside Jinja, so that is what I will be doing going forward.</p>
 
 <h3 id="charts">Charts</h3>
 
@@ -139,21 +117,8 @@
 </div>
 </body>
 
-<!--% if page.comments %
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'kevinfasusigithub';
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-% endif % -->
+
 
 
     </div>

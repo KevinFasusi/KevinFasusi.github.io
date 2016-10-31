@@ -3,9 +3,6 @@ layout: posts
 excerpt_separator: <!--more -->
 title: Thoughts on Supplychainpy Release 0.0.4
 ---
-{% for post in site.post %}
-{{% post.title %}}
-{% endfor %}
 
 For a few months now I have been working on a Project for Supply Chain reporting and analysis. It has come a little way but is far from feature complete. Currently, the project is on planning release 0.0.3 and 0.0.4 is just around the corner. <!--more --> 
 

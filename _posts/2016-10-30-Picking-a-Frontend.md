@@ -2,15 +2,12 @@
 layout: posts
 excerpt_separator: <!--more -->
 title: Thoughts on Supplychainpy Release 0.0.4
+comments: False
 ---
-{% include header.html %}
-{% for post in site.post %}
-{{% post.title %}}
-{% endfor %}
 
-For a few months now I have been working on a Project for Supply Chain reporting and analysis. It has come a little way but is far from feature complete. Currently, the project is on planning release 0.0.3 and 0.0.4 is just around the corner. <!--more --> 
+For a few months now I have been working on a project for Supply Chain reporting and analysis. It has come a little way but is far from feature complete. Currently, the project is on planning release 0.0.3 and 0.0.4 is just around the corner. <!--more --> 
 
-## Issues
+### Issues
 
 The main problems that are holding up the release, and even after release will be in a less than ideal state are:
 
@@ -21,7 +18,7 @@ The main problems that are holding up the release, and even after release will b
 
 For small inventory profiles < 500 SKUs the implementation of the forecasting is not too prohibitive. However, in more real-world scenarios it needs to deal with inventory profiles that are bigger by orders of magnitude. One issue here is that the forecasting problem is an embarrassingly parallel problem. The current implementation is sequential, parallelising this code should speed it up considerably. I love Python; I do, but gaining speed using parallel processing is not as easy as other programming languages I have used (looking at you vb.net, for all the bad press you get, boy you let me do some powerful things effortlessly).
 
-The kludge of HTML and Jinja is easy to resolve by using the macro function inside Jinja, so that is what I will be doing so going forward. 
+The kludge of HTML and Jinja is easy to resolve by using the macro function inside Jinja, so that is what I will be doing going forward. 
 
 ### Charts
 
