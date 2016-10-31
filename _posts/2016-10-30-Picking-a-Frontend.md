@@ -14,8 +14,6 @@ The main problems that are holding up the release, and even after release will b
 - The sequential computation of the forecasts using evolutionary algorithms for optimised alpha and gamma values.
 - The view for the SKU level details has become a sprawling kludge of HTML and Jinja. 
 
-### Sprawling HTML and Jinja
-
 For small inventory profiles < 500 SKUs the implementation of the forecasting is not too prohibitive. However, in more real-world scenarios it needs to deal with inventory profiles that are bigger by orders of magnitude. One issue here is that the forecasting problem is an embarrassingly parallel problem. The current implementation is sequential, parallelising this code should speed it up considerably. I love Python; I do, but gaining speed using parallel processing is not as easy as other programming languages I have used (looking at you vb.net, for all the bad press you get, boy you let me do some powerful things effortlessly).
 
 The kludge of HTML and Jinja is easy to resolve by using the macro function inside Jinja, so that is what I will be doing going forward. 
