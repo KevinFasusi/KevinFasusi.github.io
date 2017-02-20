@@ -110,11 +110,11 @@ output (table):
 		<td> 8710 </td>
 	</tr>
 	<tr>
-		<th> Opening Stock (MAX.) </th>
+		<th> Opening Stock (MAX) </th>
 		<td> 8710  </td>
 	</tr>
 	<tr>
-		<th> Opening Stock (MIN.) </th>
+		<th> Opening Stock (MIN) </th>
 		<td> 0  </td>
 	</tr>
 	<tr>
