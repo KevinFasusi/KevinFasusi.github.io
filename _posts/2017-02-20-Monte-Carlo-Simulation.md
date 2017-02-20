@@ -12,8 +12,6 @@ Building a simulation requires an abstraction of the processes involved, for the
 
 ## Describing the Process
 
-Building a simulation requires an abstraction of the processes involved, for the construction of an appropriate model. Therefore, a description of the process is a useful starting point.<!--more --> Below is a flow diagram illustrating the sequence of activities that describe the simulation process for the discrete event inventory simulation for supplychainpy.
-
 The process shown above starts by checking which period is currently being simulated. If the process is for the first period, then the 'opening stock' is assumed to be the amount calculated for the reorder level. This assumption makes it highly likely that a purchase order is raised in the first period. For all other periods, the 'opening stock' will be the 'closing stock' for the previous cycle. Demand is randomised based on the probability distribution of the historical demand profile for the SKU under simulation. Any deliveries due, get added to the inventory. The resulting stock is decremented by back orders and new order. The quantity on hand and reorder level are compared. If the amount on hand is less than the reorder level, then a purchase order is raised. Calculating the backlog and the closing stock for the next period are the final steps in the process.
 
 
