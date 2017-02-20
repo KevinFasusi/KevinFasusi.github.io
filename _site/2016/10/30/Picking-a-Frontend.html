@@ -78,8 +78,6 @@
   <li>The view for the SKU level details has become a sprawling kludge of HTML and Jinja.</li>
 </ul>
 
-<h3 id="sprawling-html-and-jinja">Sprawling HTML and Jinja</h3>
-
 <p>For small inventory profiles &lt; 500 SKUs the implementation of the forecasting is not too prohibitive. However, in more real-world scenarios it needs to deal with inventory profiles that are bigger by orders of magnitude. One issue here is that the forecasting problem is an embarrassingly parallel problem. The current implementation is sequential, parallelising this code should speed it up considerably. I love Python; I do, but gaining speed using parallel processing is not as easy as other programming languages I have used (looking at you vb.net, for all the bad press you get, boy you let me do some powerful things effortlessly).</p>
 
 <p>The kludge of HTML and Jinja is easy to resolve by using the macro function inside Jinja, so that is what I will be doing going forward.</p>
@@ -100,9 +98,9 @@
 
 <h3 id="choosing-a-front-end-framework">Choosing a Front-end Framework</h3>
 
-<p>I have been deliberating over which framework to use in the front-end. Initially, I opted for vanilla ECMAScript 6 and “a bag of Jquery” (shout out to the guys over at the ‘Linux Action Show’ for that one). For rapid development and getting the MVP down, this made a lot of sense. However, going forward I would like to make the JavaScript for the reporting side of the project just as legible and standardised as I attempt to make the Python back-end. For maintenance and minimising technical debt, this is a must.</p>
+<p>I have been deliberating over which framework to use in the front-end. Initially, I opted for vanilla ECMAScript 6 and “a bag of Jquery” (shout out to the guys over at the ‘Coder Radio’ for that one). For rapid development and getting the MVP down, this made a lot of sense. However, going forward I would like to make the JavaScript for the reporting side of the project just as legible and standardised as I attempt to make the Python back-end. For maintenance and minimising technical debt, this is a must.</p>
 
-<p>React.js seemed like the clear winner, regarding popularity, documentation and ease of adoption. After a brief tutorial and playing around with it, I did enjoy it but recently another framework has caught my attention. Vue.js is discussed in the many forums I frequent, so I popped over to their website and read the documentation and boom. It was “you’re alright” at first sight. I read the documentation, and it felt comfortable. I went through nodding my head and smiling through the code snippets. So I think I’m going to give vue.js a shot. I hope vue.js and Jinja plays nicely with each other. Here’s to a cleaner code base and a shiny front-end for the reporting.</p>
+<p>React.js seemed like the clear winner, regarding popularity, documentation and ease of adoption. After a brief tutorial and playing around with it, I did enjoy it but recently another framework has caught my attention. Vue.js is discussed in the many forums I frequent, so I popped over to their website and read the documentation and…boom! It was “you’re alright,” at first sight. I read the documentation, and it felt comfortable. I went through nodding my head and smiling through the code snippets. So I think I’m going to give vue.js a shot. I hope vue.js and Jinja play nicely with each other. Here’s to a cleaner code base and a shiny front-end for the reporting.</p>
 
 
 
