@@ -7,7 +7,7 @@ comments: False
 
 Building a simulation requires an abstraction of the processes involved, for the construction of an appropriate model. A description of the process is a useful starting point.<!--more --> Below is a flow diagram illustrating the sequence of activities that describe the simulation process for the discrete event inventory simulation in the supplychainpy library:
 
-![sim_process pic]({{base}}/assets/sim_process.png "simulation process")
+![sim_process pic]({{base}}/assets/sim_process.jpg "simulation process")
 
 
 ## Describing the Process
