@@ -67,7 +67,7 @@ When thinking about the features for supplychainpy (my supply chain analytics fo
 
 The location of items in this model may vary depending on the size of the organisation, their industry and their position within their network of suppliers and geographic location. 
 
-## Technologies that might help
+## Technologies
 
 There are several technologies I keep an eye on because a solution implementing one or two of them may just help mitigate some of these risks. The technologies mentioned below are also likely to feature heavily in the supply chain.
 
@@ -76,7 +76,7 @@ There are several technologies I keep an eye on because a solution implementing 
 My first pick is left field and not "hyped" by the media yet. Probabilistic databases are still under heavy development. As far as I am aware, a commercial platform does not exist. Probabilistic databases hope to solve the problem of missing data in a database or across related but disparate databases without a common primary key. Using weights for the various possible "worlds" (versions of tuples) the database can serve up several different answers with varying probabilities of being present in the database. I'm not even sure I understand them...but I want to believe!
 
 <table>
-    <tr>
+	<tr>
         <td><strong>Risks Mitigated</strong></td>
         <td>
            <ul>
@@ -84,11 +84,11 @@ My first pick is left field and not "hyped" by the media yet. Probabilistic data
             <li>New product introduction (NPI)</li>
             </ul> 
         </td>
-   </tr>
-   <tr>
-           <td><strong>Companies/Tools</strong></td>
+    </tr>
+    <tr>
+        <td><strong>Companies/Tools</strong></td>
         <td></td>
-   </tr>
+    </tr>
 </table>
 
 ### Blockchain
