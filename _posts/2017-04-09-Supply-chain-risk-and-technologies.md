@@ -4,20 +4,22 @@ excerpt_separator: <!--more -->
 title: Supply Chain Risk and Technologies
 comments: False
 ---
+
+{% include header.html %}
+
 Managing a supply chain invariably means managing various processes, operations and systems, all of which have associated financial risks. <!--more -->Some of these risks have different probabilities of occurring. If problems occur, their impact on the supply chain and operation can vary.
 
 For instance, inventory shortages or excess have a relatively high probability of occurring in most operations. Poor forecasting can cause this predicament but so too can the mismanagement of new product introduction (NPI) or end of life (EOL) run down of stock. Arguably, inventory shortages or excess have little impact on an operation in comparison to say a natural disaster that cuts off the supply of a required resource. The devastating flood in Thailand in 2011, resulted in an unfortunate loss of life. Another effect was a worldwide shortage of PC [hard drives](http://www.anandtech.com/show/5127/thailands-flooding-and-our-hdd-needs).
 
 When thinking about the features for supplychainpy (my supply chain analytics focused python library side project), it was helpful for me to refer to the matrix below. I have cherry-picked some of the most generic but important risks.
 
-
 <table>
 	<tr>
-        <td rowspan="2"><strong>Impact</td>
-        <td style="text-align:center;" colspan="2"> <strong >Probability </strong></td>
+        <td rowspan="2"><strong>Impact</strong></td>
+        <td style="text-align:center;" colspan="2"> <strong>Probability</strong></td>
     </tr>
     <tr>
-        <td style="text-align:center;" ><strong>Low</strong></td>
+        <td style="text-align:center;"><strong>Low</strong></td>
         <td><strong>High</strong></td>
     </tr>
     <tr>
@@ -63,7 +65,6 @@ When thinking about the features for supplychainpy (my supply chain analytics fo
         </td>
     </tr>
 </table>
-
 
 The location of items in this model may vary depending on the size of the organisation, their industry and their position within their network of suppliers and geographic location. 
 
