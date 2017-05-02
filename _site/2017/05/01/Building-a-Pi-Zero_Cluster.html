@@ -1,0 +1,145 @@
+  <html>
+  <head>
+  <!-- _includes/base.html -->
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/pygment_trac.css"> 
+    <link rel="stylesheet" href="/stylesheets/syntax.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head> 
+
+  </html>
+
+      <body>
+<div class="wrapper">
+    <header>
+        <h1>Building a Pi Zero Cluster using a ClusterHat</h1>
+        </br>
+        <p class="view"><a href="https://github.com/KevinFasusi">View My GitHub Profile</a></p>
+
+        <p class="view">
+            <!-- Twitter -->
+            <a class="btn btn-twitter" href="https://twitter.com/Kevin_Fasusi"><i class="fa fa-twitter"></i> Twitter</a><br/>
+            <!-- LinkedIn -->
+            <a class="btn btn-linkedin" href="https://t.co/vVIDg5IH6m"><i class="fa fa-linkedin"></i> LinkedIn</a><br/>
+            <!-- Googleplus -->
+            <a class="btn btn-googleplus" href="https://plus.google.com/u/0/+KevinFasusi/posts"><i
+                    class="fa fa-google-plus"></i> Google+</a>
+            <br/>
+            <a rel="stylesheet" type="text/css" href="/">Blog</a>
+            <br/>
+            <a rel="stylesheet" type="text/css" href="about/"> About</a>
+
+        </p>
+
+    </header>
+    <section>
+
+        <html>
+  <head>
+  <!-- _includes/base.html -->
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/pygment_trac.css"> 
+    <link rel="stylesheet" href="/stylesheets/syntax.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head> 
+
+  </html>
+
+        <html>
+  <head>
+  <!-- _includes/base.html -->
+
+
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
+    <link rel="stylesheet" href="/stylesheets/pygment_trac.css" /> 
+    <link rel="stylesheet" href="/stylesheets/syntax.css" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link href="http://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet" type="text/css" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head> 
+
+  </html>
+<p>I wanted to explore distributed computing and also experiment with Docker swarm. After looking into building a raspberry pi cluster, I found something called a ClusterHat sold by <a href="https://shop.pimoroni.com/products/cluster-hat">Pimoroni</a>. <!--more --> It allows you to connect the Pi zeros together over an OTG Network, without the hassle of ethernet wiring and a switch. I already had two Pi zeros, so I bought another two pi zeros and a ClusterHat. Look at this bad boy:</p>
+
+<p><img src="/assets/clusterhat.png" alt="pi zero cluster with clusterhat" /></p>
+
+<h1 id="setting-up-the-cluster">Setting up the Cluster</h1>
+
+<p>The company responsible for the ClusterHat (<a href="https://clusterhat.com/">clusterhat</a>) provide documentation for the assembly, software and control. Broadly speaking, the process involves:</p>
+
+<ul>
+  <li>
+    <p>Downloading five different iso images and mounting the images to micro sd card. Use <a href="https://etcher.io/">Etcher</a> for burning the image.</p>
+  </li>
+  <li>
+    <p>Resizing the partition on the micro sd card.</p>
+  </li>
+  <li>
+    <p>Changing the default password.</p>
+  </li>
+  <li>
+    <p>adding ssh file to the boot folder (if you plan to ssh into the controller and pi zeros).</p>
+  </li>
+</ul>
+
+<p>The ability to ssh is disabled in the recent versions of Rasbian operating system for security reasons. The easiest way to enable ssh again is to place the micro sd card into an SD card adapter and create the file in the boot folder from another machine (laptop). Then return the micro sd card back to the Pi zero.</p>
+
+<h1 id="setting-up-docker">Setting up Docker</h1>
+
+<p>Once the nodes are all setup, I installed Docker on each one using <code class="highlighter-rouge">curl -sSL https://get.docker.com | sh</code>. The cli will prompt you to changer the docker privileges using <code class="highlighter-rouge">sudo usermod -aG docker pi</code>. Initiate docker swarm on the controller pi <code class="highlighter-rouge">docker swarm init</code>.</p>
+
+<p>After setting up the manager node, the cli will output a command to run on each node (pi zeros) to join the swarm.</p>
+
+<p><img src="/assets/swarm.png" alt="swarm" /></p>
+
+<p>Now I have a cluster running docker, and that’s nice.</p>
+
+
+          </div>
+
+  </body>
+</html>
+
+
+
+    </section>
+</div>
+</body>
+
+
+
+
+
+    </div>
+
+  </body>
+</html>
