@@ -21,13 +21,13 @@ The company responsible for the ClusterHat ([clusterhat](https://clusterhat.com/
 
 - Changing the default password.
 
-- adding ssh file to the boot folder (if you plan to ssh into the controller and pi zeros). 
+- Adding ssh file to the boot folder (if you plan to ssh into the controller and pi zeros). 
 
 The ability to ssh is disabled in the recent versions of Rasbian operating system for security reasons. The easiest way to enable ssh again is to place the micro sd card into an SD card adapter and create the file in the boot folder from another machine (laptop). Then return the micro sd card back to the Pi zero.
 
 # Setting up Docker
 
-Once the nodes are all setup, I installed Docker on each one using `curl -sSL https://get.docker.com | sh`. The cli will prompt you to changer the docker privileges using `sudo usermod -aG docker pi`. Initiate docker swarm on the controller pi `docker swarm init`.
+Once the nodes are all setup, I installed Docker on each one using `curl -sSL https://get.docker.com | sh`. The cli will prompt you to change the docker privileges using `sudo usermod -aG docker pi`. Initiate docker swarm on the controller pi `docker swarm init`.
 
 After setting up the manager node, the cli will output a command to run on each node (pi zeros) to join the swarm. 
 
