@@ -107,7 +107,7 @@
     <p>Changing the default password.</p>
   </li>
   <li>
-    <p>adding ssh file to the boot folder (if you plan to ssh into the controller and pi zeros).</p>
+    <p>Adding ssh file to the boot folder (if you plan to ssh into the controller and pi zeros).</p>
   </li>
 </ul>
 
@@ -115,7 +115,7 @@
 
 <h1 id="setting-up-docker">Setting up Docker</h1>
 
-<p>Once the nodes are all setup, I installed Docker on each one using <code class="highlighter-rouge">curl -sSL https://get.docker.com | sh</code>. The cli will prompt you to changer the docker privileges using <code class="highlighter-rouge">sudo usermod -aG docker pi</code>. Initiate docker swarm on the controller pi <code class="highlighter-rouge">docker swarm init</code>.</p>
+<p>Once the nodes are all setup, I installed Docker on each one using <code class="highlighter-rouge">curl -sSL https://get.docker.com | sh</code>. The cli will prompt you to change the docker privileges using <code class="highlighter-rouge">sudo usermod -aG docker pi</code>. Initiate docker swarm on the controller pi <code class="highlighter-rouge">docker swarm init</code>.</p>
 
 <p>After setting up the manager node, the cli will output a command to run on each node (pi zeros) to join the swarm.</p>
 

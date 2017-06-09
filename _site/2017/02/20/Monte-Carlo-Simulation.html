@@ -86,7 +86,7 @@ KR202-209, 1509, 1855, 2665, 1841, 1231, 2598, 1988, 1988, 2927, 2707, 731, 2598
 
 <p>The features do not currently have a function for running the simulation for a single SKU, so in the example below a small sample file bundled in the library is used:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">supplychainpy</span> <span class="kn">import</span> <span class="n">simulate</span>
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">supplychainpy</span> <span class="kn">import</span> <span class="n">simulate</span>
 <span class="kn">from</span> <span class="nn">supplychainpy.model_inventory</span> <span class="kn">import</span> <span class="n">analyse_orders_abcxyz_from_file</span>
 <span class="kn">from</span> <span class="nn">supplychainpy.sample_data.config</span> <span class="kn">import</span> <span class="n">ABS_FILE_PATH</span>
 
@@ -128,7 +128,7 @@ KR202-209, 1509, 1855, 2665, 1841, 1231, 2598, 1988, 1988, 2927, 2707, 731, 2598
 
 <p>Summarising the results from the multiple runs offers an overview of the performance of the SKU within the system. From the summary, it is possible to make many operational inferences.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">supplychainpy.simulate</span> <span class="kn">import</span> <span class="n">summarise_frame</span>
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">supplychainpy.simulate</span> <span class="kn">import</span> <span class="n">summarise_frame</span>
 
 <span class="n">frame_summary</span> <span class="o">=</span> <span class="n">simulate</span><span class="o">.</span><span class="n">summarise_frame</span><span class="p">(</span><span class="n">sim_window</span><span class="p">)</span>
 
@@ -189,7 +189,7 @@ KR202-209, 1509, 1855, 2665, 1841, 1231, 2598, 1988, 1988, 2927, 2707, 731, 2598
 		<th> Closing Stock (MIN) </th>
 		<td>  0  </td>
 	</tr>
-		
+		&lt;/tr&gt;
 	<tr>
 		<th> Closing Stock (MAX) </th>
 		<td> 7081  </td>
