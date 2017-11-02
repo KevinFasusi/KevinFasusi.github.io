@@ -1,0 +1,179 @@
+  <html>
+  <head>
+  <!-- _includes/base.html -->
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/pygment_trac.css"> 
+    <link rel="stylesheet" href="/stylesheets/syntax.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head> 
+
+  </html>
+
+      <body>
+<div class="wrapper">
+    <header>
+        <h1>AWS Lambda and Supplychainpy (there was an attempt)</h1>
+        </br>
+        <p class="view"><a href="https://github.com/KevinFasusi">View My GitHub Profile</a></p>
+
+        <p class="view">
+            <!-- Twitter -->
+            <a class="btn btn-twitter" href="https://twitter.com/Kevin_Fasusi"><i class="fa fa-twitter"></i> Twitter</a><br/>
+            <!-- LinkedIn -->
+            <a class="btn btn-linkedin" href="https://t.co/vVIDg5IH6m"><i class="fa fa-linkedin"></i> LinkedIn</a><br/>
+            <!-- Googleplus -->
+            <a class="btn btn-googleplus" href="https://plus.google.com/u/0/+KevinFasusi/posts"><i
+                    class="fa fa-google-plus"></i> Google+</a>
+            <br/>
+            <a rel="stylesheet" type="text/css" href="/">Blog</a>
+            <br/>
+            <a rel="stylesheet" type="text/css" href="about/"> About</a>
+
+        </p>
+
+    </header>
+    <section>
+
+        <html>
+  <head>
+  <!-- _includes/base.html -->
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/pygment_trac.css"> 
+    <link rel="stylesheet" href="/stylesheets/syntax.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head> 
+
+  </html>
+
+        <p>I recently attempted to use supplychainpy from an AWS lambda function, and it did not go well. The problem was not the library itself or the process required to create a python deployment package, with all the environment dependencies, and uploading to AWS. <!--more -->I document some of the process below. This post is not a tutorial but I suppose it might be useful as confirmation of how not to go serverless.</p>
+
+<h2 id="building-the-deployment-package">Building the Deployment Package</h2>
+
+<p>I used Anaconda on an Ubuntu Linux machine to build the virtual environment for deploying the package. AWS offers Python 3.6 and 2.7 for building lambda functions. Using the conda command, I built an environment for python 3.6:</p>
+
+<p><code class="highlighter-rouge">$ conda create -n suchpy_lambda python=3.6</code></p>
+
+<p>After creating and activating the new environment, I installed the dependencies (Cython for my project and Pillow and boto3 for AWS):</p>
+
+<p><code class="highlighter-rouge">$ pip install Pillow boto3 Cython</code></p>
+
+<p>I then installed ‘supplychainpy’ (0.0.5rc0):</p>
+
+<p><code class="highlighter-rouge">$ pip install supplychainpy==0.0.5rc0</code></p>
+
+<p>To package all the dependencies I navigated to the anaconda site-packages for the environment created earlier:</p>
+
+<p><code class="highlighter-rouge">$ cd ~/anaconda/envs/suchpy_lambda/lib/python3.6/site-packages</code></p>
+
+<p>I Zipped the dependencies found in the virtual environments site-packages and moved the compressed file to a project directory:</p>
+
+<p><code class="highlighter-rouge">$ zip -r9 ~/Projects/python/supplychainpylambda/scmlambda.zip *</code></p>
+
+<p>After creating <code class="highlighter-rouge">scmlambda.zip</code> and moving it to a project directory. I created a <code class="highlighter-rouge">scmlambda.py</code> file and added the following function:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">import</span> <span class="nn">json</span> <span class="kn">as</span> <span class="nn">js</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span> <span class="nn">supplychainpy</span> <span class="kn">import</span> <span class="n">model_inventory</span>
+
+<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+    <span class="n">data_set</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s">'data_set'</span><span class="p">]</span>
+    <span class="n">data_set</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">js</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data_set</span><span class="p">))</span>
+    <span class="n">z_value</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s">'z_value'</span><span class="p">])</span>
+    <span class="n">lead_time</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s">'lead_time'</span><span class="p">])</span>
+    <span class="n">holding_cost_percentge</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s">'holding_cost_percentage'</span><span class="p">])</span>
+    <span class="n">retail_price</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s">'retail_price'</span><span class="p">])</span>
+    <span class="n">unit_cost</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s">'unit_cost'</span><span class="p">])</span>
+    <span class="n">reorder_cost</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s">'reorder_cost'</span><span class="p">])</span>
+    <span class="n">quantity_on_hand</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s">'quantity_on_hand'</span><span class="p">])</span>
+    <span class="n">backlog</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s">'backlog'</span><span class="p">])</span>
+    <span class="n">sku_id</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s">'sku_id'</span><span class="p">]</span>
+    <span class="n">currency</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s">'currency'</span><span class="p">]</span>
+    <span class="n">uncertain_demand</span> <span class="o">=</span> <span class="n">model_inventory</span><span class="o">.</span><span class="n">analyse_orders</span><span class="p">(</span><span class="n">data_set</span><span class="o">=</span><span class="n">data_set</span><span class="p">,</span>
+                                                      <span class="n">sku_id</span><span class="o">=</span> <span class="n">sku_id</span><span class="p">,</span>
+                                                      <span class="n">lead_time</span><span class="o">=</span> <span class="n">lead_time</span><span class="p">,</span>
+                                                      <span class="n">reorder_cost</span><span class="o">=</span> <span class="n">reorder_cost</span><span class="p">,</span>
+                                                      <span class="n">z_value</span> <span class="o">=</span> <span class="n">z_value</span><span class="p">,</span>
+                                                      <span class="n">retail_price</span><span class="o">=</span> <span class="n">retail_price</span><span class="p">,</span>
+                                                      <span class="n">unit_cost</span><span class="o">=</span> <span class="n">unit_cost</span><span class="p">,</span>
+                                                      <span class="n">currency</span><span class="o">=</span><span class="n">currency</span><span class="p">,</span>
+                                                      <span class="n">quantity_on_hand</span><span class="o">=</span><span class="n">quantity_on_hand</span>
+                                                     <span class="p">)</span>
+   <span class="k">return</span> <span class="n">uncertain_demand</span>
+  
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__name__"</span><span class="p">:</span>
+	<span class="n">handler</span><span class="p">()</span>
+	    </code></pre></figure>
+
+<p>This function from the supplychainpy library provides a summary of basic descriptive statistics and inventory KPI’s. The aim was to use an API Gateway as a trigger and send values to the function using JSON. As I explain below, I didn’t even get the chance to see if this specific function would work.</p>
+
+<p>Now the newly created python file is added to the previously created zip file:</p>
+
+<p><code class="highlighter-rouge">zip -g scmlambda.zip scmlambda.py</code></p>
+
+<p>At this point, all seemed to be going well. I had read elsewhere that you might want to do all of this on an AWS server instance. So I may have faced problems even if I had succeeded in uploading the deployment package.</p>
+
+<p>To upload the Python deployment package, I selected an AWS blueprint, specifically the <code class="highlighter-rouge">hello-world-python3</code>.</p>
+
+<p><img src="/assets/aws_blueprints.png" alt="AWS blueprint" title="AWS blueprints" /></p>
+
+<p>Once you have chosen a blueprint, named it and selected a role, you choose a code entry type. I uploaded from an S3 instance, which requires copying the link to the location of the file over to the Lambda function.</p>
+
+<p>It was at this stage I realised my package was too big to upload directly as the minimum is 10mb, so you are required to upload to an S3 bucket.</p>
+
+<p>I received the error message that read:</p>
+
+<p><em>The Code tab failed to save. Reason: Unzipped size must be smaller than 262144000 bytes</em>:</p>
+
+<p><img src="/assets/aws_storage.png" alt="AWS Storage" title="AWS Storage Limit" /></p>
+
+<p>I believe my failure underscores the point of a lambda function and how my attempt flies in the face of that logic. Bundling all the functionality of into a library that the function can use is not a sensible choice. It would mean each lambda would have a version of the library etc.</p>
+
+<p>I am still experimenting with AWS lambdas and the library but my initial attempt to use it lump sum in a single function was not a success. It would make more sense to separate all the library functionality across different lambda functions. I might give that a try when I have the chance.</p>
+
+
+
+          </div>
+
+  </body>
+</html>
+
+
+
+    </section>
+</div>
+</body>
+
+
+
+
+
+    </div>
+
+  </body>
+</html>

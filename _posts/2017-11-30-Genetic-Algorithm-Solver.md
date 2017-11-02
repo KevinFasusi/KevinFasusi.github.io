@@ -8,7 +8,7 @@ The first forecasting techniques implemented in supplychainpy were, "simple" and
 
 The goal of the GA solver is to find a "good enough" smoothing constant, resulting in the smallest value possible for the sum of standard errors. When searching for a minimum value, there is a risk that the result is a local minimum.
 
-To explore whether, the current solver is finding an acceptable or "good enough" constant, I ran the `simple_exponential_smoothing_forecast()` 50 times using random alpha values, between zero and one, with the optimisation flag set to `optimise=false`. The default setting for the GA are `initial_population=100,  recombination_type='single_point', mutation_probability=0.2` (currently these are fixed in the library within the population class [here](https://github.com/KevinFasusi/supplychainpy/blob/master/supplychainpy/demand/_evo_algo.pyx) and are not exposed to the public API).
+To explore whether, the current solver is finding an acceptable or "good enough" constant, I ran the `simple_exponential_smoothing_forecast()` 50 times using random alpha values. The random values for the alpha, where between zero and one with the optimisation flag set to `optimise=false`. The default setting for the GA are `initial_population=100,  recombination_type='single_point', mutation_probability=0.2` (currently these are fixed in the library within the population class [here](https://github.com/KevinFasusi/supplychainpy/blob/master/supplychainpy/demand/_evo_algo.pyx) and are not exposed to the public API).
 
 {% highlight Python %}
 
