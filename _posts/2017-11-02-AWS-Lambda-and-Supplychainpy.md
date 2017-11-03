@@ -25,7 +25,7 @@ To package all the dependencies I navigated to the anaconda site-packages for th
 
 `$ cd ~/anaconda/envs/suchpy_lambda/lib/python3.6/site-packages`
 
-I Zipped the dependencies found in the virtual environments site-packages and moved the compressed file to a project directory:
+I zipped the dependencies found in the virtual environments site-packages and moved the compressed file to a project directory:
 
 `$ zip -r9 ~/Projects/python/supplychainpylambda/scmlambda.zip *`
 
@@ -85,7 +85,7 @@ To upload the Python deployment package, I selected an AWS blueprint, specifical
 
 Once you have chosen a blueprint, named it and selected a role, you choose a code entry type. I uploaded from an S3 instance, which requires copying the link to the location of the file over to the Lambda function. 
 
-It was at this stage I realised my package was too big to upload directly as the minimum is 10mb, so you are required to upload to an S3 bucket. 
+It was at this stage I realised my package was too big to upload directly as the maximum is 10mb, so you are required to upload to an S3 bucket. 
 
 I received the error message that read:
 
